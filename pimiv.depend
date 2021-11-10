@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1636416871 source:c:\users\toxic\desktop\pimiv\main.c
+	<stdio.h>
+	<stdlib.h>
+
