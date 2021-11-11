@@ -76,7 +76,7 @@ void MostrarMenu(){
     printf("*************************************\n");
 
     printf("1) - CADASTRO DE PACIENTES\n");
-    printf("2) - CADASTRO DE CORRETORES\n");
+    printf("2) - LISTAGEM DE PACIENTES\n");
     printf("3) - SAIR DO SISTEMA\n\n");    
     printf("DIGITE A OPCAO DESEJADA: ");
     scanf("%d", &opcao);
@@ -90,7 +90,14 @@ void CadastroPacientes(){
     char nome[45];
     char cpf[20];
     char telefone[16];
-    char endereco[100];
+    
+    //Endereco
+    char rua[100];
+    char numero[10];
+    char bairro[100];
+    char cidade[100];
+    char estado[100];
+
     char idade[3];
     char email[32];
     char diagnosticData[10];
@@ -110,9 +117,27 @@ void CadastroPacientes(){
     scanf("%[^\n]", telefone);
     getchar();
     // Endereço
-    printf("Endereco: ");
-    scanf("%[^\n]", endereco);
+    printf("\n Endereco \n");
+    printf("-> Rua: ");
+    scanf("%[^\n]", rua);
     getchar();
+
+    printf("-> Numero: ");
+    scanf("%[^\n]", numero);
+    getchar();
+
+    printf("-> Bairro: ");
+    scanf("%[^\n]", bairro);   
+    getchar();
+
+    printf("-> Cidade: ");
+    scanf("%[^\n]", cidade);  
+    getchar();
+
+    printf("-> Estado: ");
+    scanf("%[^\n]", estado);            
+    getchar();
+    
     // Idade
     printf("Idade: ");
     scanf("%[^\n]", idade);    
@@ -126,26 +151,83 @@ void CadastroPacientes(){
     scanf("%[^\n]", diagnosticData); 
     getchar();  
 
-    printf("\n\nPaciente Cadastrado!\n");      
+    printf("\nCadastro Feito\n");
 
-    Sleep(1000);
+    Sleep(500);
     printf("Nome: %s \n", nome);
     printf("CPF: %d \n", cpf);
     printf("Telefone: %s \n", telefone);
+    printf("Endereco");
+    printf("-> Rua: %s \n", rua);
+    printf("-> Numero: %s \n", numero);
+    printf("-> Bairro: %s \n", bairro);   
+    printf("-> Cidade: %s \n", cidade);  
+    printf("-> Estado: %s \n", estado);                 
     printf("Idade: %d \n", idade);
     printf("Email: %s \n", email);
     printf("Data do Diagnostico: %s \n", diagnosticData);
+
+    FILE *arq;
+    arq = fopen("data.txt", "a");
+    if(arq == NULL){
+        printf("Erro ao abrir o arquivo!");
+    }
+
+    printf("\nRegistrando\n");
+    printf("1...");
+    Sleep(500);
+    printf("2...");
+    Sleep(500); 
+    printf("3...");
+    Sleep(500); 
+    printf("4...");
+    Sleep(500);     
+    printf("5...");                     
+    Sleep(500);
+
+    fprintf(arq, "Nome: %s \n", nome);
+    fprintf(arq, "CPF: %s \n", cpf);
+    fprintf(arq, "Telefone: %s \n", telefone);
+    fprintf(arq, "Endereco\n");
+    fprintf(arq, "-> Rua: %s \n", rua);
+    fprintf(arq, "-> Numero: %s \n", numero);
+    fprintf(arq, "-> Bairro: %s \n", bairro);
+    fprintf(arq, "-> Cidade: %s \n", cidade);
+    fprintf(arq, "-> Estado: %s \n", estado);
+    fprintf(arq, "Idade: %s \n", idade);
+    fprintf(arq, "Email: %s \n", email);
+    fprintf(arq, "Data do Diagnostico: %s \n", diagnosticData);
+    fprintf(arq, "======================== \n"); 
+    fclose(arq);   
+
+    printf("\n\nRegistro Salvo!\n");   
+    Sleep(500);   
+    //system("@cls||clear");
+    
 }
 
-void CadastroCorretores(){
+void ListarPacientes(){
 
-    printf("\n\nAdicione os dados do Corretor\n");
+    FILE *arq;
+    char text[200];
+
+    system("@cls||clear");
+    printf("*************************************\n");
+    printf("********Pacientes Cadastrados********\n");
+    printf("*************************************\n");
+
+    arq = fopen("data.txt", "r");
+    while(fgets(text, 200, arq) != NULL)
+    printf("%s", text);
+
+    fclose(arq);
+    getch();
 
 }
 
 int main(){
 
-    setlocale(LC_ALL, "");
+    //setlocale(LC_ALL, "");
 
     TelaLogin();
 
@@ -163,7 +245,7 @@ int main(){
 
             case 2 : // Gravar Corretores
 
-                CadastroCorretores();
+                ListarPacientes();
 
             break;
 
