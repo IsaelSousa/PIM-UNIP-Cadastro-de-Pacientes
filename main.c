@@ -83,6 +83,40 @@ void MostrarMenu(){
 
     getchar();    
 
+
+        switch (opcao)
+
+        {
+
+            case 1 : // Gravar Pacientes
+
+                CadastroPacientes();
+
+            break;
+
+            case 2 : // Gravar Corretores
+
+                ListarPacientes();
+
+            break;
+
+            case 3 : // Fechar programa
+
+                break;
+
+            break;
+
+            default :
+
+                printf("Opção Invalida!");
+
+            break;    
+        }
+
+        getchar();
+
+
+
 }
 
 void CadastroPacientes(){
@@ -202,7 +236,10 @@ void CadastroPacientes(){
 
     printf("\n\nRegistro Salvo!\n");   
     Sleep(500);   
-    //system("@cls||clear");
+    printf("Voltando para o menu!\n");
+    Sleep(1500);
+    system("@cls||clear");
+    MostrarMenu();
     
 }
 
@@ -223,6 +260,10 @@ void ListarPacientes(){
     fclose(arq);
     getch();
 
+    system("pause");
+    system("@cls||clear");
+    MostrarMenu();
+
 }
 
 int main(){
@@ -232,32 +273,6 @@ int main(){
     TelaLogin();
 
     MostrarMenu();
-
-        switch (opcao)
-
-        {
-
-            case 1 : // Gravar Pacientes
-
-                CadastroPacientes();
-
-            break;
-
-            case 2 : // Gravar Corretores
-
-                ListarPacientes();
-
-            break;
-
-            default :
-
-                printf("Opção Invalida!");
-
-            break;    
-        }
-
-        getchar();
-
 
 
     return 0;
