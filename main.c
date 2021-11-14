@@ -20,7 +20,6 @@ void TelaLogin(){
 
     while(!logged){
 
-    // Limpar o console
     printf("*************Area de Login***********\n");
 
     // Informar o ID
@@ -31,6 +30,7 @@ void TelaLogin(){
     printf("Digite a Senha: ");
     scanf("%s", senhaLoad);
 
+    //Checagem das credenciais
     if (strcmp(login, loginLoad) == 0 && strcmp(senha, senhaLoad) == 0){
         logged = 1;
 
@@ -117,6 +117,7 @@ void MostrarMenu(){
 
 }
 
+// Cadastro de Pacientes
 void CadastroPacientes(){
 
     char nome[45];
@@ -261,6 +262,7 @@ void CadastroPacientes(){
     
 }
 
+// Listagem de Pacientes
 void ListarPacientes(){
 
     FILE *arq;
