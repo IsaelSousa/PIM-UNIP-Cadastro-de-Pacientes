@@ -101,7 +101,7 @@ void MostrarMenu(){
             break;
 
             case 3 : // Fechar programa
-
+                printf("Pressione enter para sair! \n");
                 break;
 
             break;
@@ -114,8 +114,6 @@ void MostrarMenu(){
         }
 
         getchar();
-
-
 
 }
 
@@ -135,6 +133,7 @@ void CadastroPacientes(){
     char idade[3];
     char email[32];
     char diagnosticData[10];
+    char comorbidade[100];
 
     printf("\n\nAdicione os dados do Paciente\n");
 
@@ -185,6 +184,12 @@ void CadastroPacientes(){
     scanf("%[^\n]", diagnosticData); 
     getchar();  
 
+    // Comorbidade
+    printf("Comorbidade: ");
+    scanf("%[^\n]", comorbidade);
+
+    Sleep(500);
+    system("@cls||clear");
     printf("\nCadastro Feito\n");
 
     Sleep(500);
@@ -200,6 +205,7 @@ void CadastroPacientes(){
     printf("Idade: %d \n", idade);
     printf("Email: %s \n", email);
     printf("Data do Diagnostico: %s \n", diagnosticData);
+    printf("Comorbidade: %s \n", comorbidade);
 
     FILE *arq;
     arq = fopen("data.txt", "a");
@@ -207,7 +213,7 @@ void CadastroPacientes(){
         printf("Erro ao abrir o arquivo!");
     }
 
-    printf("\nRegistrando\n");
+    printf("\nVerificando\n");
     printf("1...");
     Sleep(500);
     printf("2...");
@@ -216,30 +222,42 @@ void CadastroPacientes(){
     Sleep(500); 
     printf("4...");
     Sleep(500);     
-    printf("5...");                     
+    printf("5...\n");                     
     Sleep(500);
 
-    fprintf(arq, "Nome: %s \n", nome);
-    fprintf(arq, "CPF: %s \n", cpf);
-    fprintf(arq, "Telefone: %s \n", telefone);
-    fprintf(arq, "Endereco\n");
-    fprintf(arq, "-> Rua: %s \n", rua);
-    fprintf(arq, "-> Numero: %s \n", numero);
-    fprintf(arq, "-> Bairro: %s \n", bairro);
-    fprintf(arq, "-> Cidade: %s \n", cidade);
-    fprintf(arq, "-> Estado: %s \n", estado);
-    fprintf(arq, "Idade: %s \n", idade);
-    fprintf(arq, "Email: %s \n", email);
-    fprintf(arq, "Data do Diagnostico: %s \n", diagnosticData);
-    fprintf(arq, "======================== \n"); 
-    fclose(arq);   
+    if(strlen(comorbidade) != 0){
+        fprintf(arq, "Nome: %s \n", nome);
+        fprintf(arq, "CPF: %s \n", cpf);
+        fprintf(arq, "Telefone: %s \n", telefone);
+        fprintf(arq, "Endereco\n");
+        fprintf(arq, "-> Rua: %s \n", rua);
+        fprintf(arq, "-> Numero: %s \n", numero);
+        fprintf(arq, "-> Bairro: %s \n", bairro);
+        fprintf(arq, "-> Cidade: %s \n", cidade);
+        fprintf(arq, "-> Estado: %s \n", estado);
+        fprintf(arq, "Idade: %s \n", idade);
+        fprintf(arq, "Email: %s \n", email);
+        fprintf(arq, "Data do Diagnostico: %s \n", diagnosticData);
+        fprintf(arq, "Comorbidade: %s \n", comorbidade);
+        fprintf(arq, "======================== \n"); 
+        fclose(arq);   
 
-    printf("\n\nRegistro Salvo!\n");   
-    Sleep(500);   
-    printf("Voltando para o menu!\n");
-    Sleep(1500);
-    system("@cls||clear");
-    MostrarMenu();
+        printf("\n\nRegistro Salvo!\n");   
+        Sleep(500);   
+        printf("Voltando para o menu!\n");
+        Sleep(1500);
+        system("@cls||clear");
+        MostrarMenu();
+    } else {
+        printf("Nao ha nenhuma comorbidade! \n");
+        printf("Voltando para o menu!\n");
+        Sleep(3000);
+        system("@cls||clear");
+        MostrarMenu();
+    }
+
+
+
     
 }
 
@@ -256,6 +274,7 @@ void ListarPacientes(){
     arq = fopen("data.txt", "r");
     while(fgets(text, 200, arq) != NULL)
     printf("%s", text);
+    printf("Pressione enter para voltar ao menu! \n");
 
     fclose(arq);
     getch();
